@@ -37,6 +37,17 @@ public class ControlePlayer : MonoBehaviour
         checkpoint = transform.position;
     }
 
+    private void Awake()
+    {
+        GameObject[] gObjetos = GameObject.FindGameObjectsWithTag("PRINCIPAL");
+        if (gObjetos.Length > 1)
+        {
+            gameObject.GetComponent<Collider2D>().enabled = false;
+            gObjetos[0].transform.GetChild(1).transform.position = gameObject.transform.position;
+            Destroy(gameObject.transform.parent.gameObject);
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
